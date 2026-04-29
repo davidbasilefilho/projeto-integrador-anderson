@@ -106,15 +106,15 @@ public class Main {
         // Semana 02: String.format() para alinhar colunas do relatorio
         // -------------------------------------------------------------------
         System.out.println("\n--- Auditoria de Contas (for-each + break) ---");
-        contaInvestimento.ativa(false); // simula conta desativada para demonstrar o break
+        ContaBancaria[] contasAuditoria = { contaCorrente, contaPoupanca, contaInvestimento };
 
-        for (ContaBancaria c : contas) {
+        for (ContaBancaria c : contasAuditoria) {
             String linha = String.format("Conta %d | %-12s | %-7s | R$ %9.2f",
                     c.numero(), c.resolverTipo(), c.status(), c.saldo());
             System.out.println(linha);
-            if (!c.ativa()) {
-                System.out.println("  [AUDITORIA] Conta inativa detectada — varredura interrompida.");
-                break; // Semana 04: sai do for-each ao encontrar conta inativa
+            if (c.numero() == contaInvestimento.numero()) {
+                System.out.println("  [AUDITORIA] Conta alvo detectada — varredura interrompida.");
+                break; // Semana 04: sai do for-each ao encontrar a conta alvo
             }
         }
 
